@@ -1,0 +1,72 @@
+
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<head>
+    <title>Prostate cancer Model</title>
+    <a href="/">Home</a>
+    <a href="mammo.html">Breast cancer</a>
+    <a href="heart.html">Heart disease</a>
+    <a href="lung.html">Lung cancer</a>
+</head>
+
+<form action="{{ url_for('prostate') }}" method="POST">
+    <fieldset>
+        <legend>Prostate cancer input values:</legend>
+
+        Radius:
+        <input name="radius" type="number" required>
+        <br>
+
+        <br> Perimeter:
+        <input name="perimeter" type="number" required>
+        <br>
+
+        <br> Smoothness:
+        <input name="smoothness" type="number" required>
+        <br>
+
+        <br> Compactness:
+        <input name="compactness" type="number" required>
+        <br>
+
+        <br> Symmetry:
+        <input name="symmetry" type="number" required>
+        <br>
+
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+<br>
+<div class="result" align="center">
+        {% if prostate_result == [1] %}
+            {% for variable, value in prostate_original_input.items() %}
+                <b>{{ variable }}</b> : {{ value }}
+            {% endfor %}
+            <br>
+            <br> Prediction of prostate cancer:
+                <p style="font-size:50px">{{ prostate_result }}</p>
+    
+                {% if prostate_result == [1] %}
+                <p>There is a high chance of prostate cancer.</p>
+
+                {% endif %}   
+        {% endif %}
+    
+        <!-- ====================================================== -->
+    
+        {% if prostate_result == [0] %}
+            {% if prostate_original_input %}
+                {% for variable, value in prostate_original_input.items() %}
+                    <b>{{ variable }}</b> : {{ value }}
+                {% endfor %}
+            {% endif %}
+            <br>
+            <br> Prediction of prostate cancer:
+                <p style="font-size:50px">{{ prostate_result }}</p>
+                <p>There is a low chance of prostate cancer.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

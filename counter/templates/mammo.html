@@ -1,0 +1,95 @@
+
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<head>
+    <title>Mammographic Mass Model</title>
+    <a href="/">Home</a>
+    <a href="heart.html">Heart disease</a>
+    <a href="lung.html">Lung cancer</a>
+    <a href="prostate.html">Prostate cancer</a>
+    <!-- <a href="heart.html"><img src="{{ url_for('static', filename='heart.png') }}" width="50px;" style="margin-left:20px;"></a>
+    <a href="prostate.html"><img src="{{ url_for('static', filename='prostate.png') }}" width="50px;" style="margin-left:30px;"></a>
+    <a href="lung.html"><img src="{{ url_for('static', filename='lung.png') }}" width="50px;" style="margin-left:20px;"></a> -->
+</head>
+
+<form action="{{ url_for('mammo') }}" method="POST">
+    <fieldset>
+        <legend>Mammographic mass input values:</legend>
+
+        BI-RADS:
+        <input name="birads" type="number" required>
+        <br>
+
+        <br> Age:
+        <input name="age" type="number" required>
+        <br>
+
+        <br> Margin:
+        <input name="margin" type="number" required>
+        <br>
+
+        <br> Density:
+        <input name="density" type="number" required>
+        <br>
+        <!-- <label for="shape">Shape</label>
+            <select id="shape" name="shape">
+                <option value="1">Round</option>
+                <option value="2">Oval</option>
+                <option value="3">Lobular</option>
+                <option value="4">Irregular</option>
+            </select>
+
+        <label for="shape">Margin</label>
+            <select id="shape" name="shape">
+            <option value="1">Circumscribed</option>
+            <option value="2">Microlobulated</option>
+            <option value="3">Obscured</option>
+            <option value="4">Ill-defined</option>
+            <option value="5">Spiculated</option>
+            </select>
+
+        <label for="shape">Density</label>
+            <select id="shape" name="shape">
+            <option value="1">High</option>
+            <option value="2">Iso</option>
+            <option value="3">Low</option>
+            <option value="4">Fat-containing</option>
+            <option value="5">Spiculated</option>
+            </select> -->
+
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+<br>
+<div class="result" align="center">
+    {% if  result == [1] %}
+        {% for variable, value in original_input.items() %}
+            <b>{{ variable }}</b> : {{ value }}
+        {% endfor %}
+        <br>
+        <br> Prediction of severity of breast cancer:
+            <p style="font-size:50px">{{ result }}</p>
+
+            {% if result == [1] %}
+            <p>Mammographic mass is likely to be malignant - there is a high chance of breast cancer.</p>
+            {% endif %}   
+    {% endif %}
+
+    <!-- ====================================================== -->
+
+    {% if result == [0] %}
+        {% if original_input %}
+            {% for variable, value in original_input.items() %}
+                <b>{{ variable }}</b> : {{ value }}
+            {% endfor %}
+        {% endif %}
+        <br>
+        <br> Prediction of severity of breast cancer:
+            <p style="font-size:50px">{{ result }}</p>
+            <p>Mammographic mass is likely to be benign - there is a low chance of breast cancer.</p>
+    {% endif %}
+</div>
+
+{% endblock %}

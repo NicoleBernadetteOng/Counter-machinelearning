@@ -1,0 +1,111 @@
+
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<head>
+    <title>Heart Disease Model</title>
+    <a href="/">Home</a>
+    <a href="mammo.html">Breast cancer</a>
+    <a href="lung.html">Lung cancer</a>
+    <a href="prostate.html">Prostate cancer</a>
+</head>
+
+<form action="{{ url_for('heart') }}" method="POST">
+    <fieldset>
+        <legend>Heart disease input values:</legend>
+
+        Age:
+        <input name="heart_age" type="number" required>
+        <br>
+
+        <br> Sex <br> 
+        (1: Male, 0: Female):
+        <br>
+        <input name="heart_sex" type="number" required>
+        <br>
+
+        <br> Chest pain level <br>
+        (cp, 1: typical angina, 2: atypical angina, 3: non-anginal pain, 4: asymptomatic):
+        <br>
+        <input name="cp" type="number" required>
+        <br>
+
+        <br> Resting blood pressure on admission to hospital <br> 
+        (trestbps, in mm Hg):
+        <br>
+        <input name="trestbps" type="number" required>
+        <br>
+
+        <br> Resting electrocardiographic results (restecg):
+        <br>
+        <input name="restecg" type="number" required>
+        <br>
+
+        <br> Maximum heart rate achieved (thalach):
+        <br>
+        <input name="thalach" type="number" required>
+        <br>
+
+        <br> Exercise induced angina <br> 
+        (exang, 1: yes, 0: no):
+        <br>
+        <input name="exang" type="number" required>
+        <br>
+
+        <br> ST depression induced by exercise relative to rest (oldpeak):
+        <br>
+        <input name="oldpeak" required>
+        <br>
+
+        <br> Slope of the peak exercise ST segment <br> 
+        (slope, 1: upsloping, 2: flat, 3: downsloping):
+        <br>
+        <input name="slope" type="number" required>
+        <br>
+
+        <br> Number of major vessels (0-3) colored by flourosopy (ca):
+        <br>
+        <input name="ca" type="number" required>
+        <br>
+
+        <br> Thal (thal, 3: normal, 6: fixed defect, 7: reversable defect):
+        <br>
+        <input name="thal" type="number" required>
+        <br>
+
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+<br>
+<div class="result" align="center">
+        {% if heart_result == [1] %}
+            {% for variable, value in heart_original_input.items() %}
+                <b>{{ variable }}</b> : {{ value }}
+            {% endfor %}
+            <br>
+            <br> Prediction of heart disease:
+                <p style="font-size:50px">{{ heart_result }}</p>
+    
+                {% if heart_result == [1] %}
+                <p>There is a high chance of heart disease.</p>
+
+                {% endif %}   
+        {% endif %}
+    
+        <!-- ====================================================== -->
+    
+        {% if heart_result == [0] %}
+            {% if heart_original_input %}
+                {% for variable, value in heart_original_input.items() %}
+                    <b>{{ variable }}</b> : {{ value }}
+                {% endfor %}
+            {% endif %}
+            <br>
+            <br> Prediction of heart disease:
+                <p style="font-size:50px">{{ heart_result }}</p>
+                <p>There is a low chance of heart disease.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

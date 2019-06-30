@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>COUNTER</title>
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet">
+</head>
+
+<style>
+    form {
+        margin: auto;
+        width: 35%;
+    }
+    .result {
+        margin: auto;
+        width: 35%;
+        border: 1px solid #476EB3;
+    }
+    a {
+        font-family: 'Open Sans', sans-serif;
+        margin-right: 10px; 
+    }
+    a:link {
+        text-decoration: none;
+        color: rgb(133, 162, 211);
+    }
+    a:visited {
+        text-decoration: none;
+        color: rgb(146, 155, 170);
+    }
+    a:hover {
+        text-decoration: underline;
+        color: rgb(21, 63, 134);
+    }
+    a:active {
+        text-decoration: underline;
+        color: rgb(21, 63, 134);
+    }
+    .nav {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+    }
+    h1, h2, h3, h4, h5, h6, p {
+        font-family: 'Open Sans', sans-serif;
+        color: #476EB3;
+    }
+    h1 {
+        margin-top: 4%;
+    }
+    fieldset { 
+        font-family: 'Open Sans', sans-serif;
+        color: #476EB3;
+    }
+    input[type=submit] {
+        background-color: rgb(21, 63, 134);
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        font-family: 'Open Sans', sans-serif;
+        text-decoration: none;
+        margin: 2px 2px;
+        cursor: pointer;
+    }
+    input[type=submit]:hover {
+        background-color: #476EB3;
+    }
+</style>
+
+<body>
+
+{% block content %}{% endblock %}
+
+</body>
+</html>

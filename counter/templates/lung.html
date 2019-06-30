@@ -1,0 +1,72 @@
+
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<head>
+    <title>Lung cancer Model</title>
+    <a href="/">Home</a>
+    <a href="mammo.html">Breast cancer</a>
+    <a href="heart.html">Heart disease</a>
+    <a href="prostate.html">Prostate cancer</a>
+</head>
+
+<form action="{{ url_for('lung') }}" method="POST">
+    <fieldset>
+        <legend>Lung cancer input values:</legend>
+
+        Age (age in years):
+        <br>
+        <input name="lung_age" type="number" required>
+        <br>
+
+        <br> Smokes (number of cigarettes smoked in a week):
+        <br>
+        <input name="smokes" type="number" required>
+        <br>
+
+        <br> Area of lungs (area of abnormal mass or nodule in measurement of 1-10):
+        <br>
+        <input name="areaq" type="number" required>
+        <br>
+
+        <br> Alcohol consumption (how many times alcohol is consumed in a week):
+        <br>
+        <input name="alkhol" type="number" required>
+        <br>
+
+        <br>
+        <input type="submit">
+    </fieldset>
+</form>
+<br>
+<div class="result" align="center">
+        {% if lung_result == [1] %}
+            {% for variable, value in lung_original_input.items() %}
+                <b>{{ variable }}</b> : {{ value }}
+            {% endfor %}
+            <br>
+            <br> Prediction of lung cancer:
+                <p style="font-size:50px">{{ lung_result }}</p>
+    
+                {% if lung_result == [1] %}
+                <p>There is a high chance of lung cancer.</p>
+
+                {% endif %}   
+        {% endif %}
+    
+        <!-- ====================================================== -->
+    
+        {% if lung_result == [0] %}
+            {% if lung_original_input %}
+                {% for variable, value in lung_original_input.items() %}
+                    <b>{{ variable }}</b> : {{ value }}
+                {% endfor %}
+            {% endif %}
+            <br>
+            <br> Prediction of lung cancer:
+                <p style="font-size:50px">{{ lung_result }}</p>
+                <p>There is a low chance of lung cancer.</p>
+        {% endif %}
+    </div>
+
+{% endblock %}

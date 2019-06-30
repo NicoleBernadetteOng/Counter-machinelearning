@@ -1,0 +1,38 @@
+<!-- <!DOCTYPE html>
+<html lang="en"> -->
+
+{% extends 'layouts/base.html' %}
+{% block content %}
+
+<head>
+    <title>Home</title>
+    <!-- <a href="mammo.html">Breast cancer</a>
+    <a href="heart.html">Heart disease</a>
+    <a href="lung.html">Lung cancer</a>
+    <a href="prostate.html">Prostate cancer</a> -->
+</head>
+
+<style>
+    h2, h5, p {
+        text-align: center;
+        margin-left: 22%;
+        width: 700px
+    }
+</style>
+
+<body>
+    <h1 style="margin-left:35%; font-size:80px;">COUNTER</h1>
+    <h2 style="margin-top: -40px;">“Counterpart, Countermeasure, Counteract”</h2>
+    <p>COUNTER is a counterpart of a doctor to recommend countermeasures and provide information needed to counteract and prevent diseases.</p>
+    <p>COUNTER uses the machine learning models to predict the likelihood of a person having a disease or developing one in the future based on the parameters that have been input.</p>
+    <div class="nav"> 
+        <a href="heart.html"><img src="{{ url_for('static', filename='heart.png') }}" width="150px;" style="margin-left:10px;"></a>
+        <a href="mammo.html"><img src="{{ url_for('static', filename='breast.png') }}" width="150px;" style="margin-left:20px;"></a>
+        <a href="prostate.html"><img src="{{ url_for('static', filename='prostate.png') }}" width="150px;" style="margin-left:40px;"></a>
+        <a href="lung.html"><img src="{{ url_for('static', filename='lung.png') }}" width="150px;" style="margin-left:20px;"></a>
+    </div>
+</body>
+
+<!-- </html> -->
+
+{% endblock %}
